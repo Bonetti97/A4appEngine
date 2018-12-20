@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<html>
+
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	
+<!-- <link rel="stylesheet" type="text/css" href="../static/css/style.css"/> -->
+
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html, body {
+	background-image:
+		 url(https://ununsplash.imgix.net/photo-1416339134316-0e91dc9ded92?q=75&fm=jpg&s=883a422e10fc4149893984019f63c818);
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100%;
+	font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+}
+
+.container {
+	height: 100%;
+	align-content: center;
+}
+
+.card {
+	height: 370px;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 400px;
+	background-color: rgba(0, 0, 0, 0.5) !important;
+	font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+}
+
+.head-logo h1 {
+	color: white;
+	font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+}
+
+.social_icon span {
+	font-size: 60px;
+	margin-left: 10px;
+	color: #FFC312;
+}
+
+.social_icon span:hover {
+	color: white;
+	cursor: pointer;
+}
+
+.card-header h3 {
+	color: white;
+}
+
+.card-header p {
+	color: white;
+}
+
+.social_icon {
+	position: absolute;
+	right: 20px;
+	top: -45px;
+}
+
+.input-group-prepend span {
+	width: 50px;
+	background-color: #FFC312;
+	color: black;
+	border: 0 !important;
+}
+
+input:focus {
+	outline: 0 0 0 0 !important;
+	box-shadow: 0 0 0 0 !important;
+}
+
+.remember {
+	color: white;
+}
+
+.remember input {
+	width: 20px;
+	height: 20px;
+	margin-left: 15px;
+	margin-right: 5px;
+}
+
+.login_btn {
+	color: black;
+	background-color: #FFC312;
+	width: 100px;
+}
+
+.login_btn:hover {
+	color: black;
+	background-color: white;
+}
+
+.links {
+	color: white;
+}
+
+.links a {
+	margin-left: 4px;
+}
+
+.centrado{
+margin-left: auto;
+margin-right: auto;
+}
+</style> 
+
+
+<title>Google OAuth login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-signin-client_id"
+	content="805681271880-svqsfnkj31q35f204irg0lp7u20kl6f9.apps.googleusercontent.com">
+<script>
+	function onSignIn(googleUser) {
+		var profile = googleUser.getBasicProfile();
+		var id_token = googleUser.getAuthResponse().id_token;
+		var xhr = new XMLHttpRequest();
+		xhr
+				.open(
+						'POST',
+						'http://localhost:8080/A4servidorREST/webresources/entity.usuario/loginService',
+						true);
+		xhr.setRequestHeader('Content-Type',
+				'application/x-www-form-urlencoded');
+		xhr.send("idtoken=" + id_token);
+
+		xhr.onload = function() {
+			var id = xhr.responseText;
+			window.location
+					.replace("http://localhost:8181/guardarSesion/" + id);
+		};
+
+	}
+	function signOut() {
+		var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut();
+	}
+</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="head-logo">
+			<h1>HumilArt</h1>
+		</div>
+		<div class="d-flex justify-content-center h-100">
+			<div class="card">
+				<div class="card-header">
+					<h3>Login</h3>
+					<p>Please do login to enter.</p>
+				</div>
+				<div class="centrado">
+				<div class="card-body">
+					<div class="input-group form-group">
+						<div class="g-signin2" data-onsuccess="onSignIn"></div>
+					</div>
+						<form action="invitado">
+							<button class="btn btn-primary">Entrar como invitado</button>
+						</form>
+					</div>
+				</div>
+				<div class="card-footer">
+					<div class="d-flex justify-content-center links">Si no tiene
+						cuenta puede logearse como invitado, pero no tendrá la
+						funcionalidad total de la aplicaci&oacuten.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
