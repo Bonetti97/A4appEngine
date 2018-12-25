@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block content %}
+
+<h1>Crear Comic</h1>
+<hr />
+<div class="container">
+	<div class="row d-flex justify-content-center">
+		<div class="card">
+			<div class="card-body">
+			
+				<form class="form-inline" role="form" action="" method="post"
+					enctype="multipart/form-data">
+					
+					<div class="form-group">
+						<label for="inputText" class="col-sm-3 control-label">Nombre:</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" name="nombreComic"
+								id="nombreComic" placeholder="text">
+						</div>
+					</div>
+					
+					
+					<div>
+						 <label class="btn btn-primary">  <input type="file"
+							name="portadaComic" id="portadaComic">
+						</label> 
+					
+					</div>
+					
+					
+					<span style="margin-right: 10px;"></span>
+					
+					
+					<div class="form-group text-center">
+						<button type="submit" value="submit" class="btn btn-success">Crear</button>
+					</div>
+					
+				</form>
+				
+				
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
+

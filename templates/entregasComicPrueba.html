@@ -1,0 +1,64 @@
+ {% extends "base.html" %} {% block content %}
+<h1 class="p">Entregas</h1>
+<hr />
+<div class="container align-items-center">
+	<form class="form-group" role="form" action="/newEntrega/{{comicID}}" method="get">
+		<hr />
+		<button class="btn btn-primary">Nueva Entrega</button>
+		<hr />
+	</form>
+</div>
+
+<!-- margen   <span style="margin-left: 5px;" class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> -->
+<div class="container align-items-center">
+	
+	<div class="container align-items-center">
+		<div
+			class="d-flex flex-row-reverse align-items-center pt-1 pb-1 mb-2 border-bottom">
+
+			<span style="margin-right: 10px;"></span>
+
+		</div>
+		{% if listaEntregas.count() > 0 %}
+		<div class="table-resposive">
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Portada</th>
+						<th>Fecha de creaci&oacute;n</th>
+						<th scope="col">Nombre</th>
+						<th scope="col"></th>
+						<th scope="col"></th>
+						
+					<tr>
+				</thead>
+				<tbody>
+					{% for entrega in listaEntregas %}
+					<tr>
+					
+						
+						<td>{{ entrega.nombre }}</td>
+						<td><a class="btn btn-warning" href="/editarEntrega/{{ entrega.key.id() }}">Editar </a></td>
+						
+						<td><a class="btn btn-danger"
+							href="/deleteEntrega/{{ entrega.key.id() }}">Eliminar</a></td>
+						
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+			<div class="container align-items-center">
+				<div class="text-center">
+					<div class="bg-warning warning_mesagge">
+						<label>No existen comics todav&iacute;a.</label>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+
+{% endblock content %}

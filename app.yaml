@@ -20,6 +20,9 @@ libraries:
   version: latest
 - name: markupsafe                                                              
   version: latest 
+- name:    PIL
+  version: 1.1.7
+
 
 builtins:
 - remote_api: on
