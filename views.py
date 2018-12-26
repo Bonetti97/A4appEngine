@@ -7,7 +7,7 @@ import jinja2
 
 import json
 
-from models import Comic, Entrega
+from models import Comic, Entrega,Comentario,Usuario
 
 from google.appengine.ext import ndb
 
@@ -184,9 +184,41 @@ class showEntregasComic(BaseHandler):
         else:
             self.redirect(users.create_login_url(self.request.uri))
         
+class Comentarios(BaseHandler):
+    def get(self,entregaID):
+          
+        user = users.get_current_user()
+
+        if user:
+        
+            entrega_id= int (entregaID)
+            en=Entrega.get_by_id(entrega_id)
+        
+            listaComentarios=Comentario.query(Comentario.entrega==en.key)
+       
+            self.render_template('comentarios.html', {'listaComentarios': listaComentarios,'entregaID': entregaID,'currentUserID' : user.user_id() })
+        else:
+            self.redirect(users.create_login_url(self.request.uri))        
         
         
+class AddComentario(BaseHandler):
+
+    def get(self, entregaID):
         
+        user = users.get_current_user()
+
+        if user:
+            com = self.request.get('nuevoComentario')
+            entrega_id= int (entregaID)
+            en=Entrega.get_by_id(entrega_id)
+            usuarioAux = Usuario.query(Usuario.id==user.user_id())
+            comentario = Comentario(contenido=com,entrega=en.key,usuario=usuarioAux.get().key)
+            comentario.put()
+            return webapp2.redirect('/comentarios/'+entregaID)
+            
+        else:
+            self.redirect(users.create_login_url(self.request.uri))
+
 
 
 class AddEntrega(BaseHandler):
@@ -269,8 +301,16 @@ class loginPason(webapp.RequestHandler):
         user = users.get_current_user()
 
         if user:
+            usuarioAux = Usuario.query(Usuario.id==user.user_id())
             
-            self.redirect("/comics")
+            if usuarioAux.get():
+                
+                self.redirect("/comics")
+            else:
+                print 'LOCURABRODELLOGINPASON'    
+                usuarioAux = Usuario(id=user.user_id(), nombre= user.nickname() )
+                usuarioAux.put()
+                self.redirect("/comics")
         else:
             self.redirect(users.create_login_url(self.request.uri)) 
 class logout(webapp.RequestHandler):

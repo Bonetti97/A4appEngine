@@ -2,9 +2,11 @@
 <h1 class="p">Entregas</h1>
 <hr />
 <div class="container align-items-center">
-	<form class="form-group" role="form" action="/newEntrega/{{comicID}}" method="get">
+	<form class="form-group" role="form" action="/newComentario/{{entregaID}}" method="get">
 		<hr />
-		<button class="btn btn-primary">Nueva Entrega</button>
+		<input type="text" class="form-control" name="nuevoComentario"
+								id="nuevoComentario" placeholder="text">
+		<button class="btn btn-primary">Nuevo comentario</button>
 		<hr />
 	</form>
 </div>
@@ -19,7 +21,7 @@
 			<span style="margin-right: 10px;"></span>
 
 		</div>
-		{% if listaEntregas.count() > 0 %}
+		{% if listaComentarios.count() > 0 %}
 		<div class="table-resposive">
 			<table class="table">
 				<thead class="thead-dark">
@@ -33,18 +35,15 @@
 					<tr>
 				</thead>
 				<tbody>
-					{% for entrega in listaEntregas %}
+					{% for comentario in listaComentarios %}
 					<tr>
 					
-						<td><img src="/imgEntrega?img_id={{entrega.key.urlsafe()}}"></img><td>
-						<td>{{ entrega.nombre }}</td>
-						
-						<td><a class="btn btn-warning" href="/editarEntrega/{{ entrega.key.id() }}">Editar </a></td>
-						
+						<td>{{ comentario.contenido }}</td>
+						<td>{{ comentario.usuario.get().nombre}}</td>
+						{% if currentUserID == comentario.usuario.get().id  %}
 						<td><a class="btn btn-danger"
-							href="/deleteEntrega/{{ entrega.key.id() }}">Eliminar</a></td>
-						<td><a class="btn btn-danger"
-							href="/comentarios/{{ entrega.key.id() }}">Comentarios</a></td>
+							href="/deleteEntrega/{{ comentario.key.id() }}">Eliminar</a></td>
+						{% endif %}
 						
 					</tr>
 					{% endfor %}

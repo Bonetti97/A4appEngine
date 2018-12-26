@@ -17,6 +17,7 @@ app = webapp2.WSGIApplication([
         ('/comics',showComics),
         ('/logout',views.logout),
         ('/newComic',AddComic),
+        ('/newComentario/([\d]+)',views.AddComentario),
         ('/img',Image),
         ('/imgEntrega',views.ImagenEntrega),
         ('/flickr',views.flickr),
@@ -26,6 +27,7 @@ app = webapp2.WSGIApplication([
         ('/entregasComic/([\d]+)',showEntregasComic),
         ('/newEntrega/([\d]+)',AddEntrega),
         ('/deleteEntrega/([\d]+)', DeleteEntrega),
+        ('/comentarios/([\d]+)', views.Comentarios),
         ('/editarEntrega/([\d]+)', EditEntrega)
         
         
