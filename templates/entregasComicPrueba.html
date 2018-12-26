@@ -2,11 +2,13 @@
 <h1 class="p">Entregas</h1>
 <hr />
 <div class="container align-items-center">
+	{% if comicCompleto.usuario.get().id == currentUserID%}
 	<form class="form-group" role="form" action="/newEntrega/{{comicID}}" method="get">
 		<hr />
 		<button class="btn btn-primary">Nueva Entrega</button>
 		<hr />
 	</form>
+	{% endif %}
 </div>
 
 <!-- margen   <span style="margin-left: 5px;" class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> -->

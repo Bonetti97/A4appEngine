@@ -182,7 +182,7 @@ class showEntregasComic(BaseHandler):
         
             listaEntregas=Entrega.query(Entrega.idComic==com.key)
        
-            self.render_template('entregasComicPrueba.html', {'listaEntregas': listaEntregas,'comicID': comicID, 'currentUserID' : user.user_id()})
+            self.render_template('entregasComicPrueba.html', {'listaEntregas': listaEntregas,'comicID': comicID, 'currentUserID' : user.user_id(), 'comicCompleto' : com})
         else:
             self.redirect(users.create_login_url(self.request.uri))
         
@@ -306,10 +306,10 @@ class loginPason(webapp.RequestHandler):
             usuarioAux = Usuario.query(Usuario.id==user.user_id())
             
             if usuarioAux.get():
-                
+               
                 self.redirect("/comics")
             else:
-                print 'LOCURABRODELLOGINPASON'    
+                    
                 usuarioAux = Usuario(id=user.user_id(), nombre= user.nickname() )
                 usuarioAux.put()
                 self.redirect("/comics")
