@@ -164,7 +164,20 @@ class BuscarFechaMayor(BaseHandler):
             self.redirect(users.create_login_url(self.request.uri))
             
         
+class comicsPorUsuario(BaseHandler):
+    def get(self):
         
+        user = users.get_current_user()
+
+        if user:
+            iduser= user.user_id()
+            us = Usuario.query(Usuario.id==iduser)
+
+            q=Comic.query(Comic.usuario==us.get().key)
+            
+            self.render_template('comics.html', {'listaComic': q , 'currentUserID' : iduser})
+        else:
+            self.redirect(users.create_login_url(self.request.uri))     
         
         
 

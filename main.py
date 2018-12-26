@@ -19,6 +19,7 @@ app = webapp2.WSGIApplication([
         ('/newComic',AddComic),
         ('/newComentario/([\d]+)',views.AddComentario),
         ('/img',Image),
+        ('/comicsPorUsuario',views.comicsPorUsuario),
         ('/imgEntrega',views.ImagenEntrega),
         ('/flickr',views.flickr),
         ('/editarComic/([\d]+)', EditComic),
