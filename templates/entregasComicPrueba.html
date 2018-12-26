@@ -38,11 +38,12 @@
 					
 						<td><img src="/imgEntrega?img_id={{entrega.key.urlsafe()}}"></img><td>
 						<td>{{ entrega.nombre }}</td>
-						
+						{% if currentUserID == entrega.idComic.get().usuario.get().id  %}
 						<td><a class="btn btn-warning" href="/editarEntrega/{{ entrega.key.id() }}">Editar </a></td>
 						
 						<td><a class="btn btn-danger"
 							href="/deleteEntrega/{{ entrega.key.id() }}">Eliminar</a></td>
+							{% endif %}	
 						<td><a class="btn btn-danger"
 							href="/comentarios/{{ entrega.key.id() }}">Comentarios</a></td>
 						

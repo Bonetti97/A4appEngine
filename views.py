@@ -50,7 +50,7 @@ class showComics(BaseHandler):
         if user:
         
             lista=Comic.query()
-            self.render_template('comics.html', {'listaComic': lista})
+            self.render_template('comics.html', {'listaComic': lista, 'currentUserID' : user.user_id()})
         else:
             self.redirect(users.create_login_url(self.request.uri)) 
   
@@ -71,9 +71,11 @@ class AddComic(BaseHandler):
         
         
     def post(self):
+        user = users.get_current_user()
         imagenPortada=self.request.get('portadaComic')
-        
-        com = Comic(nombre=self.request.get('nombreComic'),portada=imagenPortada)
+        usuario  = Usuario.query(Usuario.id==user.user_id())
+        usuario = usuario.get().key
+        com = Comic(nombre=self.request.get('nombreComic'),portada=imagenPortada, usuario=usuario)
                         
         com.put()#el método ENTIDAD.put() añade un nuevo OBJETO del tipo de la entidad en el dataStore
         
@@ -180,7 +182,7 @@ class showEntregasComic(BaseHandler):
         
             listaEntregas=Entrega.query(Entrega.idComic==com.key)
        
-            self.render_template('entregasComicPrueba.html', {'listaEntregas': listaEntregas,'comicID': comicID})
+            self.render_template('entregasComicPrueba.html', {'listaEntregas': listaEntregas,'comicID': comicID, 'currentUserID' : user.user_id()})
         else:
             self.redirect(users.create_login_url(self.request.uri))
         

@@ -87,10 +87,12 @@
 						<td><img src="/img?img_id={{comic.key.urlsafe()}}"></img><td>
 						<td>{{ comic.fechaCreacion.strftime('%Y-%m-%d') }}</td>
 						<td>{{ comic.nombre }}</td>
+						{% if currentUserID == comic.usuario.get().id  %}
 						<td><a class="btn btn-warning" href="/editarComic/{{ comic.key.id() }}">Editar </a></td>
 						
 						<td><a class="btn btn-danger"
 							href="/deleteComic/{{ comic.key.id() }}">Eliminar</a></td>
+						{% endif %}	
 						<td><a class="btn btn-success"
 							href="/entregasComic/{{ comic.key.id()}}">Ver entregas</a></td>
 
