@@ -13,12 +13,14 @@ class MainPage(webapp.RequestHandler):
             self.response.out.write(
                 'Hello %s <a href="%s">Sign out</a><br>Is administrator: %s' % 
                 (user.nickname(), users.create_logout_url("/"), users.is_current_user_admin())
+           
             )
+            
         else:
             self.redirect(users.create_login_url(self.request.uri))
 
 
-app = webapp.WSGIApplication([('/', MainPage)], debug=True)
+app = webapp.WSGIApplication([('/a', MainPage)], debug=True)
 
 
 def main():

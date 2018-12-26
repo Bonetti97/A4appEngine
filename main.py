@@ -5,6 +5,7 @@ from views import Image
 from views import EditComic
 from views import DeleteComic
 from views import BuscarFechaMayor
+import views
 
 import webapp2
 #comentario github
@@ -12,9 +13,13 @@ import webapp2
 
 
 app = webapp2.WSGIApplication([
-        ('/',showComics),
+        ('/',views.loginPason), 
+        ('/comics',showComics),
+        ('/logout',views.logout),
         ('/newComic',AddComic),
         ('/img',Image),
+        ('/imgEntrega',views.ImagenEntrega),
+        ('/flickr',views.flickr),
         ('/editarComic/([\d]+)', EditComic),
         ('/deleteComic/([\d]+)', DeleteComic),
         ('/buscarFechaMayor', BuscarFechaMayor),
