@@ -203,12 +203,12 @@ class Comentarios(BaseHandler):
     def get(self,entregaID):
           
         user = users.get_current_user()
-
+        
         if user:
         
             entrega_id= int (entregaID)
             en=Entrega.get_by_id(entrega_id)
-        
+            
             listaComentarios=Comentario.query(Comentario.entrega==en.key)
        
             self.render_template('comentarios.html', {'listaComentarios': listaComentarios,'entregaID': entregaID,'currentUserID' : user.user_id() })

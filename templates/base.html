@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,10 +19,105 @@
 	crossorigin="anonymous">
 <!-- Custom CSS -->
 <style>
-body {
-	padding-top: 10px;
-	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+
+html, body {
+	background-image:
+				url('https://i.pinimg.com/originals/72/18/e2/7218e261e63e04acc903df31ec88999c.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: auto;
+	width:100%;
+	font-family: 'Numans', sans-serif;
 }
+.titulo h1{
+color: white;
+font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
+}
+.navbar {
+	background-color: rgba(0, 0, 0, 0.75) !important;
+	padding-top: 10px;
+}
+.card{
+background-color: #edefed !important;
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+border-radius: 5px 5px 5px 5px;
+}
+.card label {
+	color:black;
+}
+.help {
+margin-left:50px;
+}
+.table {
+background-color: rgba(0, 0, 0, 0.5)
+color: white
+}
+.container p {
+	color: black;
+}
+
+
+.box21{overflow:hidden}
+.mt-30{margin-top:30px}
+.mt-40{margin-top:40px}
+.mb-30{margin-bottom:30px}
+
+.box21{box-shadow:0 0 5px #a3a3a3}
+.box21{text-align:center;position:relative}
+.box21:after,.box21:before{content:"";width:2px;height:2px;border-radius:50%;background:rgba(0,0,0,.35);position:absolute;top:50%;left:50%;-webkit-transform:scale(0);-moz-transform:scale(0);-ms-transform:scale(0);-o-transform:scale(0);transform:scale(0)}
+.box21:hover:after,.box21:hover:before{-webkit-transform:scale(400);-moz-transform:scale(400);-ms-transform:scale(400);-o-transform:scale(400);transform:scale(400)}
+.box21:before{-o-transition:all .5s linear .3s;-moz-transition:all .5s linear .3s;-ms-transition:all .5s linear .3s;-webkit-transition:all .5s linear .3s;transition:all .5s linear .3s}
+.box21:hover:before{-moz-transition-delay:0s;-webkit-transition-delay:0s;-o-transition-delay:0s;-ms-transition-delay:0s;transition-delay:0s}
+.box21:after{-o-transition:all .5s linear .6s;-moz-transition:all .5s linear .6s;-ms-transition:all .5s linear .6s;-webkit-transition:all .5s linear .6s;transition:all .5s linear .6s}
+.box21:hover:after{-moz-transition-delay:.2s;-webkit-transition-delay:.2s;-o-transition-delay:.2s;-ms-transition-delay:.2s;transition-delay:.2s}
+.box21 img{width:100%;height:auto}
+.box21 .box-content{width:100%;height:100%;position:absolute;top:0;left:0;background:0 0;color:#fff;padding-top:25px;-webkit-transform:scale(0);-moz-transform:scale(0);-ms-transform:scale(0);-o-transform:scale(0);transform:scale(0);-ms-transition:all .3s linear 0s;-o-transition:all .3s linear 0s;-webkit-transition:all .3s linear 0s;-moz-transition:all .3s linear 0s;transition:all .3s linear 0s;z-index:1}
+.box21:hover .box-content{-webkit-transform:scale(1);-moz-transform:scale(1);-ms-transform:scale(1);-o-transform:scale(1);transform:scale(1);-moz-transition-delay:.4s;-webkit-transition-delay:.4s;-o-transition-delay:.4s;-ms-transition-delay:.4s;transition-delay:.4s}
+.box21 .title{font-size:21px;font-weight:700;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:20px;margin-top:20px}
+.box21 .description{color:white;font-size:14px;font-style:italic;padding:0 10px;margin:15px 0}
+.box21 .delete{display:block;width:120px;background:#CC0000;border-radius:5px;font-size:14px;color:#fff;text-transform:capitalize;padding:4px 0;margin:0 auto}
+.box21 .edit{display:block;width:120px;background:#CCCC00;border-radius:5px;font-size:14px;color:#fff;text-transform:capitalize;padding:4px 0;margin:0 auto}
+.box21 .success{display:block;width:120px;background:#008000;border-radius:5px;font-size:14px;color:#fff;text-transform:capitalize;padding:4px 0;margin:0 auto}
+@media only screen and (max-width:990px){.box21{margin-bottom:30px}
+}
+@media only screen and (max-width:479px){.box21 .box-content{padding-top:10px}
+}
+@media only screen and (max-width:359px){.box21 .title{padding-bottom:10px}
+}
+
+/*Button */
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  line-height: 1.428571429;
+  border-radius: 10px;
+}
+
+.btn-circle.btn-xl  {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 36px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
+
+.btn-float{
+    position: fixed;
+    right: 37px;
+    bottom:100px;
+}
+
+.btn-lateral{
+    background-color: #04B404;
+    color: white;
+    margin: 10px;
+}
+
 </style>
 
 

@@ -1,12 +1,14 @@
  {% extends "base.html" %} {% block content %}
-<h1 class="p">Entregas</h1>
+<div class="titulo">
+<h1>Comentarios </h1>
+</div>
 <hr />
 <div class="container align-items-center">
-	<form class="form-group" role="form" action="/newComentario/{{entregaID}}" method="get">
+	<form class="form-inline" role="form" action="/newComentario/{{entregaID}}" method="get">
 		<hr />
 		<input type="text" class="form-control" name="nuevoComentario"
 								id="nuevoComentario" placeholder="text">
-		<button class="btn btn-primary">Nuevo comentario</button>
+		<button class="btn btn-dark">Nuevo comentario</button>
 		<hr />
 	</form>
 </div>
@@ -23,13 +25,11 @@
 		</div>
 		{% if listaComentarios.count() > 0 %}
 		<div class="table-resposive">
-			<table class="table">
+			<table class="table table-dark">
 				<thead class="thead-dark">
 					<tr>
-						<th scope="col">Portada</th>
-						<th>Fecha de creaci&oacute;n</th>
-						<th scope="col">Nombre</th>
-						<th scope="col"></th>
+						<th scope="col">Comentario</th>
+						<th scope="col">Usuario</th>
 						<th scope="col"></th>
 						
 					<tr>
@@ -53,7 +53,7 @@
 			<div class="container align-items-center">
 				<div class="text-center">
 					<div class="bg-warning warning_mesagge">
-						<label>No existen comics todav&iacute;a.</label>
+						<label>No existen comentarios todav&iacute;a. </label>
 					</div>
 				</div>
 			</div>

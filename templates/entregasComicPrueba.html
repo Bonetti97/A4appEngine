@@ -1,12 +1,15 @@
  {% extends "base.html" %} {% block content %}
-<h1 class="p">Entregas</h1>
+<div class="titulo">
+<h1>Entregas</h1>
+</div>
 <hr />
 <div class="container align-items-center">
 	{% if comicCompleto.usuario.get().id == currentUserID%}
+
 	<form class="form-group" role="form" action="/newEntrega/{{comicID}}" method="get">
-		<hr />
-		<button class="btn btn-primary">Nueva Entrega</button>
-		<hr />
+				<div class="btn-float">
+				 <button class="btn btn-default btn-circle btn-xl btn-lateral" title="Crear Entrega"><span>+</span></button>
+				 </div>
 	</form>
 	{% endif %}
 </div>
@@ -22,6 +25,37 @@
 
 		</div>
 		{% if listaEntregas.count() > 0 %}
+		<div class="container mt-40 mb-30">
+            <div class="row mt-30">
+            {% for entrega in listaEntregas %}
+                <div class="col-md-4 col-sm-6">
+                    <div class="box21">
+                        <img src="/imgEntrega?img_id={{entrega.key.urlsafe()}}">
+                        <div class="box-content">
+                            <h4 class="title">{{ entrega.nombre }}</h4>
+                           
+                            {% if currentUserID == entrega.idComic.get().usuario.get().id  %}
+                            <a class="edit" href="/editarEntrega/{{ entrega.key.id() }}">Editar </a>
+                		 	<a class="delete" href ="/deleteEntrega/{{ entrega.idEntrega }}">Eliminar</a>
+                		 	{% endif %}	
+                		 	<a class="success" href="/comentarios/{{ entrega.key.id() }}">Comentarios</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {%else%}
+                <div class="container align-items-center">
+				<div class="text-center">
+					<div class="bg-warning warning_mesagge">
+						<label>No existen entregas asociadas a este comic todav&iacute;a.</label>
+					</div>
+				</div>
+			</div>
+               
+            </div>
+        </div>
+		{%endif%}
+		<!--  
 		<div class="table-resposive">
 			<table class="table">
 				<thead class="thead-dark">
@@ -53,15 +87,16 @@
 					{% endfor %}
 				</tbody>
 			</table>
-			{% else %}
+			
 			<div class="container align-items-center">
 				<div class="text-center">
 					<div class="bg-warning warning_mesagge">
-						<label>No existen comics todav&iacute;a.</label>
+						<label>No existen entregas asociadas a este comic todav&iacute;a.</label>
 					</div>
 				</div>
 			</div>
-			{% endif %}
+			
+			-->
 		</div>
 	</div>
 </div>
