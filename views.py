@@ -387,7 +387,7 @@ class comicVinesAPI(BaseHandler):
             r = json.loads(result.content)
             lista = r['results']
             listaCo = []
-            for i in range(len(lista)):
+            for i in range(20):
                 nombre = lista[i]['volume']['name'].encode('utf-8')
                 link = lista[i]['volume']['site_detail_url'].encode('utf-8')
                 capitulo= '#'+lista[i]['issue_number']
