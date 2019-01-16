@@ -4,6 +4,7 @@ import webapp2
 from google.appengine.ext import webapp
 from google.appengine.api import users
 import jinja2
+import comicAPI
 
 import json
 
@@ -16,6 +17,7 @@ from google.appengine.api import images
 from google.appengine.api import urlfetch
 import datetime #esto lo vamos a usar para pasar de string a fecha.
 from google.appengine.api import users
+import random
 
 
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), 'templates')
@@ -364,14 +366,41 @@ class flickr(BaseHandler):
                 id=lista[i]['id']
                 urlfoto = 'http://farm'+str(farm)+'.staticflickr.com/'+str(server)+'/'+str(id)+'_'+str(secret)+'_z.jpg'
                 listaUrl.append(urlfoto)
-            
+                
             
             self.render_template('flickr.html', {'lista': listaUrl}) 
         else:
             self.redirect(users.create_login_url(self.request.uri))
         
         
-        
+class comicVinesAPI(BaseHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user:
+            off= random.randint(1,200000)
+            apikey="b901f389a03fdda0105174f012fc273e6bd273c9"  
+            url= "https://comicvine.gamespot.com/api/issues/?api_key="+apikey+"&format=json&offset="+str(off)
+            headers={'User-Agent': 'HumilArt app'}
+            result = urlfetch.fetch(
+                        url=url,
+                        headers=headers)
+            r = json.loads(result.content)
+            lista = r['results']
+            listaCo = []
+            for i in range(len(lista)):
+                nombre = lista[i]['volume']['name'].encode('utf-8')
+                link = lista[i]['volume']['site_detail_url'].encode('utf-8')
+                capitulo= '#'+lista[i]['issue_number']
+                imagen = lista[i]['image']['medium_url']
+                co = comicAPI.comicAPI(nombre,link,capitulo,imagen)
+                listaCo.append(co)
+            self.render_template('comicVinesAPI.html', {'lista' : listaCo}) 
+        else:
+            self.redirect(users.create_login_url(self.request.uri))
+            
+ 
+     
+            
         
         
             

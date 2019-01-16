@@ -22,6 +22,7 @@ app = webapp2.WSGIApplication([
         ('/comicsPorUsuario',views.comicsPorUsuario),
         ('/imgEntrega',views.ImagenEntrega),
         ('/flickr',views.flickr),
+        ('/comicVinesAPI',views.comicVinesAPI),   
         ('/editarComic/([\d]+)', EditComic),
         ('/deleteComic/([\d]+)', DeleteComic),
         ('/buscarFechaMayor', BuscarFechaMayor),
