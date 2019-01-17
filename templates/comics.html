@@ -75,6 +75,7 @@
                         <div class="box-content">
                             <h4 class="title">{{ comic.nombre }}</h4>
                             <p class="description"> {{ comic.fechaCreacion.strftime('%Y-%m-%d') }}</p>
+                            <p class="description"> Autor: {{comic.usuario.get().nombre }}
                             {% if currentUserID == comic.usuario.get().id  %}
                             <a class="edit" href="/editarComic/{{ comic.key.id() }}">Editar </a>
                             
