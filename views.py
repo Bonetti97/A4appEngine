@@ -6,6 +6,7 @@ from google.appengine.api import users
 import jinja2
 import comicAPI
 
+
 import json
 
 from models import Comic, Entrega,Comentario,Usuario
@@ -37,11 +38,6 @@ class BaseHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template(filename)
         self.response.out.write(template.render(template_values))
     
-        
-        
-class login(BaseHandler):
-    def get(self):
-        self.render_template('login.html', {})
         
 
 class showComics(BaseHandler):
@@ -135,7 +131,7 @@ class EditComic(BaseHandler):
     
 class DeleteComic(BaseHandler):
 
-    def get(self, comicID):
+    def post(self, comicID):
         
         user = users.get_current_user()
 
@@ -147,10 +143,11 @@ class DeleteComic(BaseHandler):
             return webapp2.redirect('/')
         else:
             self.redirect(users.create_login_url(self.request.uri))
-        
+    
+            
 
 class BuscarFechaMayor(BaseHandler):
-    def get(self):
+    def post(self):
         
         user = users.get_current_user()
 
@@ -167,7 +164,7 @@ class BuscarFechaMayor(BaseHandler):
             
         
 class comicsPorUsuario(BaseHandler):
-    def get(self):
+    def post(self):
         
         user = users.get_current_user()
 
@@ -197,7 +194,7 @@ class showEntregasComic(BaseHandler):
         
             listaEntregas=Entrega.query(Entrega.idComic==com.key)
        
-            self.render_template('entregasComicPrueba.html', {'listaEntregas': listaEntregas,'comicID': comicID, 'currentUserID' : user.user_id(), 'comicCompleto' : com})
+            self.render_template('entregasComic.html', {'listaEntregas': listaEntregas,'comicID': comicID, 'currentUserID' : user.user_id(), 'comicCompleto' : com})
         else:
             self.redirect(users.create_login_url(self.request.uri))
         
@@ -220,7 +217,7 @@ class Comentarios(BaseHandler):
         
 class AddComentario(BaseHandler):
 
-    def get(self, entregaID):
+    def post(self, entregaID):
         
         user = users.get_current_user()
 
@@ -232,7 +229,8 @@ class AddComentario(BaseHandler):
             comentario = Comentario(contenido=com,entrega=en.key,usuario=usuarioAux.get().key)
             comentario.put()
             return webapp2.redirect('/comentarios/'+entregaID)
-            
+
+           
         else:
             self.redirect(users.create_login_url(self.request.uri))
 
@@ -270,10 +268,7 @@ class AddEntrega(BaseHandler):
         
 class DeleteEntrega(BaseHandler):
 
-    def get(self, entregaID):
-        
-        
-        
+    def post(self, entregaID):
         user = users.get_current_user()
 
         if user:
@@ -281,6 +276,24 @@ class DeleteEntrega(BaseHandler):
             en=Entrega.get_by_id(entrega_id)
             en.key.delete()
             return webapp2.redirect('/')
+        else:
+            self.redirect(users.create_login_url(self.request.uri))
+
+class DeleteComentario(BaseHandler):
+
+    def post(self, comentarioID,entregaID):
+        
+        
+        
+        user = users.get_current_user()
+
+        if user:
+            comentario_id= int (comentarioID)
+            en=Comentario.get_by_id(comentario_id)
+            en.key.delete()
+            entrega_id= int (entregaID)
+            en=Entrega.get_by_id(entrega_id)     
+            return webapp2.redirect('/comentarios/'+entregaID)
         else:
             self.redirect(users.create_login_url(self.request.uri))
        
@@ -311,7 +324,7 @@ class EditEntrega(BaseHandler):
         
         return webapp2.redirect('/')  
     
-class loginPason(webapp.RequestHandler):
+class login(webapp.RequestHandler):
     
     
     def get(self):

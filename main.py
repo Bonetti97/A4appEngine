@@ -13,7 +13,7 @@ import webapp2
 
 
 app = webapp2.WSGIApplication([
-        ('/',views.loginPason), 
+        ('/',views.login), 
         ('/comics',showComics),
         ('/logout',views.logout),
         ('/newComic',AddComic),
@@ -27,9 +27,10 @@ app = webapp2.WSGIApplication([
         ('/deleteComic/([\d]+)', DeleteComic),
         ('/buscarFechaMayor', BuscarFechaMayor),
         ('/entregasComic/([\d]+)',showEntregasComic),
-        ('/newEntrega/([\d]+)',AddEntrega),
-        ('/deleteEntrega/([\d]+)', DeleteEntrega),
+        ('/newEntrega/([\d]+)',views.AddEntrega),
+        ('/deleteEntrega/([\d]+)', views.DeleteEntrega),
         ('/comentarios/([\d]+)', views.Comentarios),
+        ('/deleteComentario/([\d]+)/([\d]+)', views.DeleteComentario),
         ('/editarEntrega/([\d]+)', EditEntrega)
         
         

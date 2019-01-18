@@ -4,7 +4,7 @@
 </div>
 <hr />
 <div class="container align-items-center">
-	<form class="form-inline" role="form" action="/newComentario/{{entregaID}}" method="get">
+	<form class="form-inline" role="form" action="/newComentario/{{entregaID}}" method="post">
 		<hr />
 		<input type="text" class="form-control" name="nuevoComentario"
 								id="nuevoComentario" placeholder="text">
@@ -41,8 +41,12 @@
 						<td>{{ comentario.contenido }}</td>
 						<td>{{ comentario.usuario.get().nombre}}</td>
 						{% if currentUserID == comentario.usuario.get().id  %}
-						<td><a class="btn btn-danger"
-							href="/deleteEntrega/{{ comentario.key.id() }}">Eliminar</a></td>
+					
+						<td>
+						<form action="/deleteComentario/{{comentario.key.id()}}/{{entregaID}}" method="post">
+							<button class ="btn btn-danger">Eliminar</button>
+						</form>	
+						</td>
 						{% endif %}
 						
 					</tr>

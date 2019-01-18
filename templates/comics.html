@@ -33,7 +33,7 @@
 			<div class="btn-group mr-2">
 				<div class="form-group mx-sm-3 mb-2">
 					<form class="form-inline" role="form" action="/comicsPorUsuario"
-						method="get">
+						method="post">
 						<div class="input-group">
 							<div class="input-group-append">
 								<button type="submit" value="submit" class="btn btn-dark">Mostrar mis comics.</button>
@@ -43,7 +43,7 @@
 				</div>
 				<div class="form-group mx-sm-3 mb-2">
 					<form class="form-inline" role="form" action="/buscarFechaMayor"
-						method="get">
+						method="post">
 						<div class="input-group">
 							<input type="date" class="form-control" name="busquedaFechaMayor"
 								id="busquedaFechaMayor" placeholder="fecha" required></input>
@@ -76,12 +76,16 @@
                             <p class="description"> {{ comic.fechaCreacion.strftime('%Y-%m-%d') }}</p>
                             <p class="description"> Autor: {{comic.usuario.get().nombre }}
                             {% if currentUserID == comic.usuario.get().id  %}
-                            <a class="edit" href="/editarComic/{{ comic.key.id() }}">Editar </a>
-                            
-                		 	<a class="delete" href ="/deleteComic/{{ comic.key.id() }}">Eliminar</a>
+                            <form action="/editarComic/{{ comic.key.id() }}" method="get">
+                            	<button class="btn btn-warning">Editar</button>
+                            </form>
+                            <form action="/deleteComic/{{ comic.key.id() }}" method="post">
+                		 		<button class="btn btn-danger">Eliminar</button>
+                		 	</form>
                 		 	{% endif %}
-                		 	<a class="success"
-							href="/entregasComic/{{ comic.key.id()}}">Ver entregas</a>
+                		 	<form action="/entregasComic/{{ comic.key.id()}}" method="get">
+                				<button class="btn btn-success">Ver Entregas</button>
+                			</form>
                         </div>
                     </div>
                 </div>

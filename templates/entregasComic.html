@@ -35,10 +35,17 @@
                             <h4 class="title">{{ entrega.nombre }}</h4>
                            
                             {% if currentUserID == entrega.idComic.get().usuario.get().id  %}
-                            <a class="edit" href="/editarEntrega/{{ entrega.key.id() }}">Editar </a>
-                		 	<a class="delete" href ="/deleteEntrega/{{ entrega.idEntrega }}">Eliminar</a>
+                            <form action="/editarEntrega/{{ entrega.key.id() }}" method="get">
+								<button class ="btn btn-warning">Editar</button>                           
+                            </form>
+                    		<form action="/deleteEntrega/{{ entrega.key.id() }}" method="post">
+                		 		<button class="btn btn-danger">Eliminar</button>
+                		 	</form>
                 		 	{% endif %}	
-                		 	<a class="success" href="/comentarios/{{ entrega.key.id() }}">Comentarios</a>
+                		 	<form action="/comentarios/{{ entrega.key.id() }}" action=get>
+                		 		<button class="btn btn-success" >Comentarios</button>
+                		 	</form>
+                		 	
                         </div>
                     </div>
                 </div>
